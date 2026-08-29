@@ -102,3 +102,115 @@ COMMENT ON COLUMN message_status.message_id IS 'Référence au message pour lequ
 COMMENT ON COLUMN message_status.user_id    IS 'Référence à l''utilisateur pour lequel on suit le statut';
 COMMENT ON COLUMN message_status.status     IS 'Statut du message pour l''utilisateur (sent, delivered, read)';
 COMMENT ON COLUMN message_status.updated_at IS 'Date et heure de mise à jour du statut';
+
+-- =====================================================================
+--  3. DONNÉES D'EXEMPLE
+-- =====================================================================
+
+-- ---------- Utilisateurs ----------
+INSERT INTO users (fullname, email, password, is_online) VALUES
+    ('Christian Mputu',  'christian.mputu@kadea.school', 'hash_christian_1', TRUE),
+    ('Junior Kabongo',   'junior.kabongo@kadea.school',  'hash_junior_2', TRUE),
+    ('Sarah Lukusa',     'sarah.lukusa@kadea.school',    'hash_sarah_3', FALSE),
+    ('Patrick Mbala',    'patrick.mbala@kadea.school',   'hash_patrick_4', TRUE),
+    ('Grâce Tshala',     'grace.tshala@kadea.school',    'hash_grace_5', FALSE),
+    ('David Ilunga',     'david.ilunga@kadea.school',    'hash_david_6', TRUE);
+
+-- ---------- Conversations ----------
+-- 2 conversations privées + 2 conversations de groupe
+INSERT INTO conversations (is_group, title) VALUES
+    (FALSE, NULL),                       -- id 1 : Christian ↔ Junior
+    (FALSE, NULL),                       -- id 2 : Sarah ↔ Patrick
+    (TRUE,   'Équipe Web Dev Kadea'),      -- id 3 : Christian, Junior, Sarah, Patrick
+    (TRUE,   'Cours de Base de Données');  -- id 4 : Grâce, David, Christian
+
+
+-- ---------- Participants ----------
+-- Conversation 1 (privée) : Christian + Junior
+INSERT INTO conversation_participants (conversation_id, user_id) VALUES
+    (1, 1), (1, 2);
+
+-- Conversation 2 (privée) : Sarah + Patrick
+INSERT INTO conversation_participants (conversation_id, user_id) VALUES
+    (2, 3), (2, 4);
+
+-- Conversation 3 (groupe) : Christian, Junior, Sarah, Patrick
+INSERT INTO conversation_participants (conversation_id, user_id) VALUES
+    (3, 1), (3, 2), (3, 3), (3, 4);
+
+-- Conversation 4 (groupe) : Grâce, David, Christian
+INSERT INTO conversation_participants (conversation_id, user_id) VALUES
+    (4, 5), (4, 6), (4, 1);
+
+-- ---------- Messages ----------
+-- Conversation 1 : Christian ↔ Junior
+INSERT INTO messages (content, conversation_id, sender_id) VALUES
+    ('Salut Junior, tu avances sur le projet Kadea Chat ?', 1, 1),
+    ('Salut Christian ! Oui, je viens de finir la page de profil.', 1, 2),
+    ('Super, on se voit en cours alors ?', 1, 1);
+
+-- Conversation 2 : Sarah ↔ Patrick
+INSERT INTO messages (content, conversation_id, sender_id) VALUES
+    ('Patrick, tu as reçu le cours sur la 3e forme normale ?', 2, 3),
+    ('Oui Sarah, je l ai lu hier soir. Intéressant !', 2, 4);
+
+-- Conversation 3 (groupe) : Équipe Web Dev
+INSERT INTO messages (content, conversation_id, sender_id) VALUES
+    ('Bonjour l équipe, réunion à 15h pour le point frontend.', 3, 1),
+    ('Noté, je serai à l heure.', 3, 2),
+    ('Je prépare le rapport de tests avant la réunion.', 3, 4),
+    ('Parfait, merci Patrick. Sarah tu es prête ?', 3, 1),
+    ('Oui, j ai fini ma partie hier.', 3, 3);
+
+-- Conversation 4 (groupe) : Cours de Base de Données
+INSERT INTO messages (content, conversation_id, sender_id) VALUES
+    ('Quelqu’un peut m expliquer les clés étrangères ?', 4, 5),
+    ('Bien sûr Grâce, je t envoie un exemple ce soir.', 4, 6),
+    ('Merci David d avoir partagé la doc PostgreSQL.', 4, 5);
+
+-- ---------- Statuts des messages (par destinataire) ----------
+-- Message 1 (conv 1, expéditeur 1) -> destinataire 2 : lu
+INSERT INTO message_status (message_id, user_id, status) VALUES
+    (1, 2, 'read');
+-- Message 2 (exp. 2) -> destinataire 1 : délivré
+INSERT INTO message_status (message_id, user_id, status) VALUES
+    (2, 1, 'delivered');
+-- Message 3 (exp. 1) -> destinataire 2 : envoyé
+INSERT INTO message_status (message_id, user_id, status) VALUES
+    (3, 2, 'sent');
+
+-- Conversation 2
+-- Message 4 (exp. 3) -> destinataire 4 : lu
+INSERT INTO message_status (message_id, user_id, status) VALUES
+    (4, 4, 'read');
+-- Message 5 (exp. 4) -> destinataire 3 : délivré
+INSERT INTO message_status (message_id, user_id, status) VALUES
+    (5, 3, 'delivered');
+
+-- Conversation 3 (groupe) : plusieurs destinataires par message
+-- Message 6 (exp. 1) -> destinataires 2, 3, 4
+INSERT INTO message_status (message_id, user_id, status) VALUES
+    (6, 2, 'read'),
+    (6, 3, 'read'),
+    (6, 4, 'delivered');
+-- Message 7 (exp. 2) -> destinataires 1, 3, 4
+INSERT INTO message_status (message_id, user_id, status) VALUES
+    (7, 1, 'read'),
+    (7, 3, 'delivered'),
+    (7, 4, 'sent');
+-- Message 8 (exp. 4) -> destinataires 1, 2, 3
+INSERT INTO message_status (message_id, user_id, status) VALUES
+    (8, 1, 'read'),
+    (8, 2, 'read'),
+    (8, 3, 'delivered');
+-- Message 9 (exp. 1) -> destinataires 2, 3, 4
+INSERT INTO message_status (message_id, user_id, status) VALUES
+    (9, 2, 'sent'),
+    (9, 3, 'sent'),
+    (9, 4, 'sent');
+-- Message 10 (exp. 3) -> destinataires 1, 2, 4
+INSERT INTO message_status (message_id, user_id, status) VALUES
+    (10, 1, 'delivered'),
+    (10, 2, 'delivered'),
+    (10, 4, 'sent');
+
