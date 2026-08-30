@@ -119,7 +119,7 @@ Le script `database.sql` est conçu pour s'exécuter en **deux temps** (la comma
 
 ## Draw.io 
 
-![lien Draw.io ](https://viewer.diagrams.net/?tags=%7B%7D&lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=modelisation(merise).drawio&page-id=RfXflSii7_TupqB0Iarx&dark=auto#Uhttps://drive.google.com/uc?id=1-Sy0WyC4f2HE64OHz6UkZyhUn6YeL09q&export=download#%7B%22pageId%22%3A%22RfXflSii7_TupqB0Iarx%22%7D)
+[lien Draw.io ](https://viewer.diagrams.net/?tags=%7B%7D&lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=modelisation(merise).drawio&page-id=RfXflSii7_TupqB0Iarx&dark=auto#Uhttps://drive.google.com/uc?id=1-Sy0WyC4f2HE64OHz6UkZyhUn6YeL09q&export=download#%7B%22pageId%22%3A%22RfXflSii7_TupqB0Iarx%22%7D)
 
 Le fichier **`docs/kadea_chat_merise.drawio`** contient les **trois onglets obligatoires** :
 
