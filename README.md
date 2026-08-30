@@ -119,7 +119,7 @@ Le script `database.sql` est conçu pour s'exécuter en **deux temps** (la comma
 
 ## Draw.io 
 
-![lien Draw.io ](https://viewer.diagrams.net/?tags=%7B%7D&lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=modelisation(merise).drawio&page-id=RfXflSii7_TupqB0Iarx&dark=auto#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D1-Sy0WyC4f2HE64OHz6UkZyhUn6YeL09q%26export%3Ddownload)
+![lien Draw.io ](https://viewer.diagrams.net/?tags=%7B%7D&lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=modelisation(merise).drawio&page-id=RfXflSii7_TupqB0Iarx&dark=auto#Uhttps://drive.google.com/uc?id=1-Sy0WyC4f2HE64OHz6UkZyhUn6YeL09q&export=download#%7B%22pageId%22%3A%22RfXflSii7_TupqB0Iarx%22%7D)
 
 Le fichier **`docs/kadea_chat_merise.drawio`** contient les **trois onglets obligatoires** :
 
@@ -169,7 +169,7 @@ Le script insère des données réalistes permettant de tester toutes les relati
 
 ### 1. Structure et Tables
 ![Structure de la base kadea_chat](docs/screenshot/structure.png%20.png)
-![Tables de la base kadea_chat](docs/screenshot/01_structure_tables.png)
+![Tables de la base kadea_chat](docs/screenshot/Tables.png)
 
 ### 2. Exécution des requêtes SQL de test et Résultats obtenus
 ![Requêtes SQL dans le Query Tool](docs/screenshot/COUNT,JOIN%20,%20ORDERBY,GROUPBY.png)
