@@ -214,3 +214,37 @@ INSERT INTO message_status (message_id, user_id, status) VALUES
     (10, 2, 'delivered'),
     (10, 4, 'sent');
 
+-- =====================================================================
+--  4. REQUÊTES SQL DE TEST
+--  Vérifient que la base fonctionne et exploitent les relations.
+-- =====================================================================
+
+-- ---------- 4.1 Afficher tous les utilisateurs ----------
+SELECT id, fullname, email, is_online, created_at
+FROM users
+ORDER BY created_at;
+
+-- ---------- 4.2 Afficher toutes les conversations ----------
+SELECT id, is_group, title, created_at
+FROM conversations
+ORDER BY created_at;
+
+-- ---------- 4.3 Afficher les participants d'une conversation ----------
+-- Participants de la conversation 3 (groupe Web Dev)
+SELECT cp.conversation_id,
+    u.id       AS user_id,
+    u.fullname,
+    cp.joined_at
+FROM conversation_participants cp
+JOIN users u ON u.id = cp.user_id
+WHERE cp.conversation_id = 3
+ORDER BY cp.joined_at;
+
+-- ---------- 4.4 Nombre de participants par conversation ----------
+SELECT c.id AS conversation_id,
+    c.is_group,
+    COUNT(cp.user_id) AS participant_count
+FROM conversations c
+JOIN conversation_participants cp ON cp.conversation_id = c.id
+GROUP BY c.id, c.is_group
+ORDER BY participant_count DESC;
